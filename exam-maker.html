@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Maker</title>
+    <link rel="stylesheet" href="exam-maker.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Exam Maker</h1>
+            <p>Create Custom Practice Exams by uploading course materials</p>
+        </header>
+
+        <section class="upload-section">
+            <label for="upload" class="upload-box">
+                <input type="file" id="upload" class="upload-input" accept=".pdf, .docx, .txt" multiple>
+                <p>Drag and drop files here or click to upload.</p>
+            </label>
+        </section>
+
+        <section class="options-section">
+            <h2>Question Types:</h2>
+            <div class="checkbox-group">
+                <label><input type="checkbox"> Multiple Choice</label>
+                <label><input type="checkbox"> Fill in the Blank</label>
+                <label><input type="checkbox"> Free Response</label>
+            </div>
+        </section>
+
+        <section class="exam-length-section">
+            <h2>Exam Length:</h2>
+            <div class="radio-group">
+                <label><input type="radio" name="length" value="30-minutes"> 30 minutes</label>
+                <label><input type="radio" name="length" value="1-hour"> 1 hour</label>
+                <label><input type="radio" name="length" value="3-hours"> 3 hours</label>
+            </div>
+        </section>
+
+        <section class="additional-requests-section">
+            <h2>Additional Requests:</h2>
+            <textarea placeholder="e.g., Include a free response about Bayes’ Theorem"></textarea>
+        </section>
+
+        <footer>
+            <button class="generate-btn">Generate Exam</button>
+        </footer>
+    </div>
+</body>
+</html>
