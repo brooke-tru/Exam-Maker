@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Maker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/exam-maker.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Exam Maker</h1>
+            <p>Create Custom Practice Exams by uploading course materials</p>
+        </header>
+
+        <form action="/generate" method="post" enctype="multipart/form-data" target="_blank">
+            <section class="upload-section">
+                <h2>Upload Files:</h2>
+                <input type="file" name="files" multiple>
+            </section>
+
+            <section class="options-section">
+                <h2>Question Types:</h2>
+                <label><input type="checkbox" name="question_types" value="Multiple Choice"> Multiple Choice</label><br>
+                <label><input type="checkbox" name="question_types" value="Fill in the Blank"> Fill in the Blank</label><br>
+                <label><input type="checkbox" name="question_types" value="Free Response"> Free Response</label><br>
+            </section>
+
+            <section class="exam-length-section">
+                <h2>Exam Length:</h2>
+                <label><input type="radio" name="exam_length" value="30-minutes"> 30 minutes</label><br>
+                <label><input type="radio" name="exam_length" value="1-hour"> 1 hour</label><br>
+                <label><input type="radio" name="exam_length" value="3-hours"> 3 hours</label><br>
+            </section>
+
+            <section class="additional-requests-section">
+                <h2>Additional Requests:</h2>
+                <textarea name="additional_requests" rows="4" cols="50" placeholder="e.g., Include a free response about Bayes’ Theorem"></textarea>
+            </section>
+
+            <footer>
+                <button type="submit">Generate Exam</button>
+            </footer>
+        </form>
+    </div>
+</body>
+</html>
