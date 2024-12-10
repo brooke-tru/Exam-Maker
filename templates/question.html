@@ -1,0 +1,47 @@
+<div class="question-container">
+    <h2>Question {{ index + 1 }}/{{ total }}</h2>
+    <p>{{ question_data.question }}</p>
+    <button onclick="showAnswer()">Show Answer</button>
+    <button onclick="goToNext()">Next Question</button>
+
+    <!-- Display this section if the current question is the last one -->
+    {% if index == total - 1 %}
+        <button onclick="seeFullExam()">See Full Exam</button>
+        <button onclick="seeFullAnswerSheet()">See Full Answer Sheet</button>
+    {% endif %}
+
+    <div id="answer" style="margin-top: 10px;"></div>
+</div>
+
+<script>
+    function showAnswer() {
+        fetch(`/answer/{{ index }}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.answer) {
+                    document.getElementById('answer').innerText = data.answer;
+                } else {
+                    document.getElementById('answer').innerText = "Answer not available.";
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching answer:', error);
+                document.getElementById('answer').innerText = "Error fetching answer.";
+            });
+    }
+
+    function goToNext() {
+        // Check if we're at the last question
+        if ({{ index }} < {{ total - 1 }}) {
+            window.location.href = "/question/{{ index + 1 }}";
+        }
+    }
+
+    function seeFullExam() {
+        window.open('/full_exam', '_blank');
+    }
+
+    function seeFullAnswerSheet() {
+        window.open('/full_answer_sheet', '_blank');
+    }
+</script>
