@@ -1,17 +1,142 @@
-<div class="question-container">
-    <h2>Question {{ index + 1 }}/{{ total }}</h2>
-    <p>{{ question_data.question }}</p>
-    <button onclick="showAnswer()">Show Answer</button>
-    <button onclick="goToNext()">Next Question</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Review</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Display this section if the current question is the last one -->
-    {% if index == total - 1 %}
-        <button onclick="seeFullExam()">See Full Exam</button>
-        <button onclick="seeFullAnswerSheet()">See Full Answer Sheet</button>
-    {% endif %}
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
 
-    <div id="answer" style="margin-top: 10px;"></div>
-</div>
+        .question-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .question-container h2 {
+            font-size: 24px;
+            color: #0078f8;
+            margin-bottom: 15px;
+        }
+
+        .question-container p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .answers p {
+            margin: 5px 0;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        button {
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn-container, .last-buttons {
+            display: flex;
+            justify-content: center;  /* Center buttons horizontally */
+            gap: 25px;  /* Adds spacing between buttons */
+            margin-top: 20px;  /* Adds top margin to separate from previous content */
+        }
+        
+        .btn-container {
+            gap: 90px;
+        }
+
+        .btn-container button {
+            background-color: #0078f8;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #answer {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .last-buttons button {
+            background-color: #28a745;
+        }
+
+        .last-buttons button:hover {
+            background-color: #218838;
+        }
+
+        .question-container .btn-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="question-container">
+        <h2>Question {{ index + 1 }}/{{ total }}</h2>
+        <p>{{ question_data.question }}</p>
+    
+        <!-- Dynamically display the answer options -->
+        <div class="answers">
+            {% for answer in question_data.answers %}
+                <p>{{ answer }}</p>
+            {% endfor %}
+        </div>
+    
+        <div class="btn-container">
+            <button onclick="showAnswer()">Show Answer</button>
+            <button onclick="goToNext()">Next Question</button>
+        </div>
+    
+        <!-- Display this section if the current question is the last one -->
+        {% if index == total - 1 %}
+        <div class="last-buttons">
+            <button onclick="seeFullExam()">See Full Exam</button>
+            <button onclick="seeFullAnswerSheet()">See Full Answer Sheet</button>
+        </div>
+        {% endif %}
+    
+        <div id="answer" style="margin-top: 10px;"></div>
+    </div>
+    
 
 <script>
     function showAnswer() {
@@ -45,3 +170,6 @@
         window.open('/full_answer_sheet', '_blank');
     }
 </script>
+
+</body>
+</html>
